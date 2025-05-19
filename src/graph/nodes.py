@@ -64,6 +64,21 @@ def background_investigation_node(
             logger.error(
                 f"Tavily search returned malformed response: {searched_content}"
             )
+    elif SELECTED_SEARCH_ENGINE == SearchEngine.UNIFIED:
+        from src.tools.search import LoggedUnifiedSearch
+        searched_content = LoggedUnifiedSearch(
+            max_results=configurable.max_search_results
+        ).invoke({"query": query})
+        background_investigation_results = None
+        if isinstance(searched_content, list):
+            background_investigation_results = [
+                {"title": elem["title"], "content": elem["content"]}
+                for elem in searched_content
+            ]
+        else:
+            logger.error(
+                f"Unified search returned malformed response: {searched_content}"
+            )
     else:
         background_investigation_results = get_web_search_tool(
             configurable.max_search_results
@@ -468,11 +483,12 @@ async def researcher_node(
     """Researcher node that do research"""
     logger.info("Researcher node is researching.")
     configurable = Configuration.from_runnable_config(config)
+    web_search_tool = get_web_search_tool(configurable.max_search_results)
     return await _setup_and_execute_agent_step(
         state,
         config,
         "researcher",
-        [get_web_search_tool(configurable.max_search_results), crawl_tool],
+        [web_search_tool, crawl_tool],
     )
 
 

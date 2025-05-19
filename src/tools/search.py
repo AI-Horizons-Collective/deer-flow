@@ -15,6 +15,7 @@ from src.tools.tavily_search.tavily_search_results_with_images import (
 )
 
 from src.tools.decorators import create_logged_tool
+from src.tools.unified_search import UnifiedSearchResultsWithImages
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +24,7 @@ LoggedTavilySearch = create_logged_tool(TavilySearchResultsWithImages)
 LoggedDuckDuckGoSearch = create_logged_tool(DuckDuckGoSearchResults)
 LoggedBraveSearch = create_logged_tool(BraveSearch)
 LoggedArxivSearch = create_logged_tool(ArxivQueryRun)
+LoggedUnifiedSearch = create_logged_tool(UnifiedSearchResultsWithImages)
 
 
 # Get the selected search tool
@@ -53,6 +55,14 @@ def get_web_search_tool(max_search_results: int):
                 load_max_docs=max_search_results,
                 load_all_available_meta=True,
             ),
+        )
+    elif SELECTED_SEARCH_ENGINE == SearchEngine.UNIFIED.value:
+        return LoggedUnifiedSearch(
+            name="web_search",
+            max_results=max_search_results,
+            include_raw_content=True,
+            include_images=True,
+            include_image_descriptions=True,
         )
     else:
         raise ValueError(f"Unsupported search engine: {SELECTED_SEARCH_ENGINE}")

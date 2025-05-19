@@ -4,7 +4,7 @@
 from pathlib import Path
 from typing import Any, Dict
 
-from langchain_openai import ChatOpenAI
+from langchain_openai import AzureChatOpenAI as ChatOpenAI
 
 from src.config import load_yaml_config
 from src.config.agents import LLMType
