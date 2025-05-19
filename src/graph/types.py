@@ -13,7 +13,8 @@ class State(MessagesState):
     """State for the agent system, extends MessagesState with next field."""
 
     # Runtime Variables
-    locale: str = "en-US"
+    # locale: str = "en-US"
+    locale: str = "zh-CN"
     observations: list[str] = []
     plan_iterations: int = 0
     current_plan: Plan | str = None
