@@ -1,0 +1,36 @@
+{
+  "name": "deer-flow-web-vite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DeerFlow Web UI (Vite + React + TypeScript)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,md}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.7",
+    "@types/react-router-dom": "^5.3.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.6.0",
+    "tw-animate-css": "^1.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.0.0",
+    "eslint-plugin-react": "^7.0.0",
+    "postcss": "^8.5.3",
+    "prettier": "^3.0.0",
+    "tailwindcss": "^4.1.7",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0"
+  }
+}
